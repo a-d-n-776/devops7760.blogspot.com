@@ -1,0 +1,42 @@
+https://devops7760.blogspot.com/
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - group: sum_variable_group
+
+
+
+stages:
+
+- stage: STAGE_0
+  displayName: '000'
+  jobs:
+  - job: Job0A
+  
+- stage: STAGE_1
+  displayName: 'BUILD-STAGE'
+  jobs:
+  
+  - job: Job1A
+    steps:
+    - task: CmdLine@2
+      displayName: 'Run a one-line script'
+      inputs:
+        script: echo Hello, world!
+
+  - job: Job1B
+
+- stage: STAGE_2
+  displayName: 'TEST-STAGE'
+  jobs:
+  - job: Job2A
+
+
+- stage: STAGE_3
+  displayName: DEPLOYMENT-STAGE
+  jobs:
+  - job: Job3A
